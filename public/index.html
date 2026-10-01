@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>颐年呼叫联动系统</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .nav-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:16px; }
+  .nav-card { background:var(--surface); border:2px solid var(--green); border-radius:var(--radius); padding:20px; text-decoration:none; color:var(--ink); }
+  .nav-card:hover { background:var(--green-soft); }
+  .nav-card .t { font-size:1.3rem; font-weight:800; color:var(--green-dark); }
+  .nav-card .d { color:var(--gray); margin-top:6px; font-size:.92rem; }
+</style>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div class="page">
+  <h1>颐年呼叫联动系统 <span class="muted" style="font-size:.9rem">演示环境 · 所有住户数据均为虚构样本</span></h1>
+  <div id="login-area"></div>
+  <div class="nav-cards">
+    <a class="nav-card" href="floor.html"><div class="t">楼层屏</div><div class="d">床位图 + 实时呼叫,高对比大字,位置与时间紧邻展示</div></a>
+    <a class="nav-card" href="mobile.html"><div class="t">护理员手机端</div><div class="d">只保留当前待办与确认动作</div></a>
+    <a class="nav-card" href="patrol.html"><div class="t">夜巡任务</div><div class="d">巡更计划与打卡,漏检单独提醒</div></a>
+    <a class="nav-card" href="handover.html"><div class="t">交班记录</div><div class="d">链式交接不断链,附件存本地</div></a>
+    <a class="nav-card" href="stats.html"><div class="t">响应统计</div><div class="d">响应时长、超时、急救、误触统计</div></a>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2>演示账号</h2>
+    <table class="grid">
+      <tr><th>岗位</th><th>姓名</th><th>PIN</th><th>权限要点</th></tr>
+      <tr><td>护理员(2F)</td><td>陈静 / 刘洋</td><td>1001 / 1002</td><td>本楼层待办、到床旁确认、结案、填报误触</td></tr>
+      <tr><td>护理员(3F)</td><td>赵敏 / 孙浩</td><td>1003 / 1004</td><td>同上,仅限 3F</td></tr>
+      <tr><td>值班长</td><td>周岚</td><td>2001</td><td>派单、误触核对、急救结案、查看健康信息</td></tr>
+      <tr><td>管理员</td><td>系统管理员</td><td>9001</td><td>含紧急联系人在内的完整住户资料</td></tr>
+    </table>
+  </div>
+</div>
+<script src="shared.js"></script>
+<script>
+  renderTopbar('');
+  if (!Auth.staff) renderLogin('login-area', () => location.reload());
+  else document.getElementById('login-area').innerHTML =
+    `<div class="banner info">已登录:${esc(Auth.staff.name)}。可从上方入口进入各页面。</div>`;
+</script>
+</body>
+</html>

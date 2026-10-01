@@ -1,0 +1,14 @@
+{
+  "name": "carecall",
+  "version": "1.0.0",
+  "description": "养老机构呼叫联动系统(床位/按钮/护理员/夜巡),零依赖 Node 实现",
+  "type": "module",
+  "scripts": {
+    "start": "node run.js",
+    "demo": "node run.js --demo",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}

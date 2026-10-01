@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>楼层屏 · 床位图与实时呼叫</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* 楼层屏:高对比大字,远距离可读 */
+  .floor-head { display:flex; align-items:baseline; gap:20px; flex-wrap:wrap; }
+  .floor-head h1 { font-size:2rem; margin:0; color:var(--green-dark); }
+  .floor-clock { font-size:2.2rem; font-weight:800; color:var(--green-dark); font-variant-numeric:tabular-nums; }
+  .floor-tabs { display:flex; gap:8px; }
+  .floor-tabs button { font-size:1.1rem; padding:8px 20px; }
+  .floor-tabs button.sel { background:var(--green-dark); }
+
+  .layout { display:grid; grid-template-columns: 1.6fr 1fr; gap:16px; align-items:start; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  .bed-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; }
+  .bed {
+    background:var(--surface); border:2px solid var(--line); border-radius:var(--radius);
+    padding:12px 14px; min-height:118px; display:flex; flex-direction:column; gap:4px;
+  }
+  .bed .room { font-size:1.7rem; font-weight:800; color:var(--green-dark); line-height:1.1; }
+  .bed .rname { font-size:1.05rem; font-weight:600; }
+  .bed .sub { font-size:.85rem; color:var(--gray); }
+  .bed.st-active { border-color:var(--amber); background:var(--amber-soft); }
+  .bed.st-emg { border-color:var(--red); background:var(--red-soft); }
+  .bed.st-offline { border-style:dashed; border-color:#a9a294; background:#f4f1ea; }
+  .bed.st-away { border-color:#8aa0b4; }
+
+  .call-card {
+    border-radius:var(--radius); padding:14px 16px; margin-bottom:12px; border:2px solid var(--amber);
+    background:var(--surface);
+  }
+  .call-card.emg { border-color:var(--red); background:var(--red-soft); }
+  /* 呼叫位置与时间紧邻展示 */
+  .call-loc { font-size:1.9rem; font-weight:800; color:var(--ink); line-height:1.15; }
+  .call-time { font-size:1.25rem; font-weight:700; color:var(--green-dark); font-variant-numeric:tabular-nums; margin-top:2px; }
+  .call-meta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+  .call-card.emg .call-loc { color:var(--red); }
+  .badge { display:inline-block; padding:2px 10px; border-radius:8px; font-weight:700; font-size:.85rem; background:var(--green-soft); color:var(--green-dark); }
+  .badge.amber { background:var(--amber-soft); color:var(--amber); }
+  .badge.red { background:var(--red-soft); color:var(--red); }
+
+  .ticker { overflow:hidden; }
+  .ticker div { padding:3px 0; font-weight:600; }
+</style>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div class="page" style="max-width:1400px">
+  <div class="floor-head">
+    <h1 id="floor-name">楼层屏</h1>
+    <div class="floor-tabs" id="floor-tabs"></div>
+    <div style="flex:1"></div>
+    <div class="floor-clock" id="clock">--:--:--</div>
+  </div>
+  <div id="alerts" style="margin:12px 0"></div>
+  <div class="layout">
+    <section>
+      <h2 style="color:var(--green-dark)">床位图</h2>
+      <div class="bed-grid" id="bed-grid"></div>
+    </section>
+    <section>
+      <h2 style="color:var(--green-dark)">实时呼叫 <span class="badge red" id="emg-count" style="display:none"></span></h2>
+      <div id="call-list"></div>
+      <div class="card">
+        <h2>最新播报</h2>
+        <div class="ticker" id="ticker"></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="shared.js"></script>
+<script src="floor.js"></script>
+</body>
+</html>

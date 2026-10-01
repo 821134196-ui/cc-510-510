@@ -1,0 +1,109 @@
+/* 设计基调:暖白底、深绿主色、急救红仅限急救状态;所有告警都带文字,不只靠颜色。 */
+:root {
+  --bg: #faf6ee;
+  --surface: #ffffff;
+  --ink: #1e2b24;
+  --green: #1d5b45;
+  --green-dark: #123c2d;
+  --green-soft: #e4efe8;
+  --line: #dcd4c4;
+  --amber: #8a5a00;
+  --amber-soft: #fbf0d9;
+  --red: #b3261e;
+  --red-soft: #fbe7e5;
+  --gray: #6b7265;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+html { font-size: 17px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  line-height: 1.5;
+}
+
+a { color: var(--green); }
+
+.topbar {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: var(--green-dark); color: #fff;
+  padding: 12px 20px;
+}
+.topbar .brand { font-size: 1.25rem; font-weight: 700; letter-spacing: 1px; }
+.topbar nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.topbar nav a {
+  color: #d9e8df; text-decoration: none; padding: 6px 12px; border-radius: 8px; font-size: 0.95rem;
+}
+.topbar nav a:hover, .topbar nav a.active { background: rgba(255,255,255,.14); color: #fff; }
+.topbar .who { margin-left: auto; font-size: 0.9rem; color: #cfe0d6; }
+.topbar .who button { margin-left: 8px; }
+
+.page { max-width: 1180px; margin: 0 auto; padding: 20px; }
+.page h1 { font-size: 1.5rem; margin: 8px 0 16px; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px; margin-bottom: 16px;
+}
+.card h2 { margin: 0 0 12px; font-size: 1.15rem; color: var(--green-dark); }
+
+button, .btn {
+  font: inherit; cursor: pointer;
+  background: var(--green); color: #fff; border: none; border-radius: 10px;
+  padding: 10px 18px; font-weight: 600;
+}
+button:hover { background: var(--green-dark); }
+button.ghost { background: transparent; color: var(--green); border: 2px solid var(--green); }
+button.ghost:hover { background: var(--green-soft); }
+button.danger { background: var(--red); }
+button.danger:hover { background: #8f1d17; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button.big { font-size: 1.25rem; padding: 16px 22px; border-radius: 14px; }
+
+input, select, textarea {
+  font: inherit; padding: 9px 12px; border: 1.5px solid var(--line); border-radius: 9px;
+  background: #fff; color: var(--ink); width: 100%;
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+label { display: block; font-weight: 600; margin: 10px 0 4px; font-size: .95rem; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.row > * { flex: 1; min-width: 160px; }
+
+/* 状态徽章:图标 + 文字,绝不只靠颜色区分 */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 12px; border-radius: 999px; border: 2px solid transparent;
+  font-weight: 700; font-size: .9rem; white-space: nowrap;
+}
+.chip::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.chip-ok    { background: var(--green-soft); color: var(--green-dark); border-color: var(--green); }
+.chip-info  { background: #e8eef5; color: #1d3f5b; border-color: #2f5b7f; }
+.chip-warn  { background: var(--amber-soft); color: var(--amber); border-color: var(--amber); }
+.chip-emg   { background: var(--red-soft); color: var(--red); border-color: var(--red); }
+.chip-muted { background: #eee; color: var(--gray); border-color: #bbb; }
+
+.banner {
+  border-radius: var(--radius); padding: 12px 18px; margin-bottom: 14px;
+  font-weight: 700; border: 2px solid;
+}
+.banner.warn { background: var(--amber-soft); border-color: var(--amber); color: var(--amber); }
+.banner.emg  { background: var(--red-soft); border-color: var(--red); color: var(--red); }
+.banner.info { background: var(--green-soft); border-color: var(--green); color: var(--green-dark); }
+
+table.grid { width: 100%; border-collapse: collapse; }
+table.grid th, table.grid td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+table.grid th { color: var(--green-dark); font-size: .92rem; }
+
+.muted { color: var(--gray); }
+.err { color: var(--red); font-weight: 600; }
+.ok-text { color: var(--green); font-weight: 600; }
+
+.login-box { max-width: 420px; margin: 40px auto; }
+.stat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.stat-card .num { font-size: 2rem; font-weight: 800; color: var(--green-dark); }
+.stat-card .num.emg { color: var(--red); }
+.stat-card .lbl { color: var(--gray); font-size: .9rem; }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>护理员手机端 · 当前待办</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* 手机端:只保留当前待办和确认动作,大按钮大字体 */
+  .page { max-width: 560px; }
+  .todo {
+    background:var(--surface); border:2px solid var(--green); border-radius:var(--radius);
+    padding:16px; margin-bottom:14px;
+  }
+  .todo.emg { border-color:var(--red); background:var(--red-soft); }
+  .todo.overdue { border-color:var(--amber); background:var(--amber-soft); }
+  .todo .loc { font-size:1.6rem; font-weight:800; }
+  .todo .time { font-size:1.05rem; font-weight:700; color:var(--green-dark); }
+  .actions { display:flex; flex-direction:column; gap:10px; margin-top:12px; }
+  .actions button { width:100%; font-size:1.2rem; padding:15px; }
+  .section-title { font-size:1.15rem; color:var(--green-dark); margin:18px 0 10px; font-weight:800; }
+  .empty { text-align:center; padding:40px 0; color:var(--green-dark); font-size:1.3rem; font-weight:700; }
+</style>
+</head>
+<body>
+<div id="topbar" class="topbar"></div>
+<div class="page">
+  <div id="app"></div>
+</div>
+<script src="shared.js"></script>
+<script src="mobile.js"></script>
+</body>
+</html>
